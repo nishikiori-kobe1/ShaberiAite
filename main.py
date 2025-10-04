@@ -36,7 +36,7 @@ if not user_input:
 #llm
 #llm = ChatOpenAI()
 #llm = ChatOpenAI(model="gpt-4o-mini", temperature=1.2)
-llm = ChatGoogleGenerativeAI(model="gemini-pro",google_api_key="MY_API_KEYAIzaSyCSiIDLumn9G5_KNthVlmmOfiM6OvnPLEA")
+llm = ChatGoogleGenerativeAI(model="gemini-2.5-pro",google_api_key="MY_API_KEYAIzaSyCSiIDLumn9G5_KNthVlmmOfiM6OvnPLEA")
 
 #プロンプト
 #prompt = ChatPromptTemplate.from_messages([
