@@ -1,0 +1,21 @@
+〇Streamlit起動
+streamlit run try001.py
+
+〇langchain 確認
+pip show langchain
+
+〇API KEY セット
+$env:OPENAI_API_KEY="XXXXXX"
+
+〇python VS Code 仮想環境
+1. ディレクトリから開く
+2.python -m venv .venv
+3.各ライブラリ　インストール
+
+〇VsCode仮想環境
+.venv\Scripts\Activate.ps1
+
+〇VsCode 
+python -m venv .venv
+
+
