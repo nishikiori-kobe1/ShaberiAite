@@ -3,14 +3,15 @@ from langchain_core.prompts import ChatPromptTemplate
 from langchain_core.output_parsers import StrOutputParser
 from langchain_google_genai import ChatGoogleGenerativeAI
 import streamlit as st
+import os
 
 ###### dotenv を利用しない場合は消してください ######
-try:
-    from dotenv import load_dotenv
-    load_dotenv()
-except ImportError:
-    import warnings
-    warnings.warn("dotenv not found. Please make sure to set your environment variables manually.", ImportWarning)
+#try:
+#    from dotenv import load_dotenv
+#    load_dotenv()
+#except ImportError:
+#    import warnings
+#    warnings.warn("dotenv not found. Please make sure to set your environment variables manually.", ImportWarning)
 ################################################
 
 # 画面
@@ -23,9 +24,6 @@ character_name = st.selectbox('誰と喋りますか？', ('ゆうちゃみ', '�
 st.divider()
 
 
-
-
-
 # 質問
 #user_input = "いい天気やん"
 
@@ -33,16 +31,17 @@ user_input = st.text_input("なんか喋って", value="こんにちは")
 if not user_input:
     st.stop()
 
-#llm
+#llm    
 #llm = ChatOpenAI()
 #llm = ChatOpenAI(model="gpt-4o-mini", temperature=1.2)
-llm = ChatGoogleGenerativeAI(model="gemini-2.5-pro")
+google_api_key = st.secrets["GOOGLE_API_KEY"]
+if not google_api_key:
+    st.error("Google Generative AIのAPIキーが設定されていません。環境変数 'GOOGLE_API_KEY' をセットしてください。")
+    st.stop()
+llm = ChatGoogleGenerativeAI(model="gemini-2.5-pro", google_api_key=google_api_key)
+
 
 #プロンプト
-#prompt = ChatPromptTemplate.from_messages([
-#    ("system","あなたは、ゆうちゃみです。ゆうちゃみ風にユーザーと会話してください。話す内容やキャラクターに応じて絵文字も使ってください。"),
-#    ("user","{input}")
-#])
 prompt = ChatPromptTemplate.from_messages([
     ("system", f"あなたは、{character_name}です。{character_name}風にユーザーと会話してください。"),
     ("user", "{input}")
